@@ -29,6 +29,30 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+Real-world recommendation systems use different types of data to figure out what users might want to listen to next. For example, Spotify looks at things like a user's listening history, liked songs, playlists, and the characteristics of the songs they listen to. In this project, I am building a **content-based recommender**, which means the system recommends songs by comparing a user's preferences to the features of each song instead of comparing them to other users.
+
+For example, if a user mostly listens to pop music, the recommender can recognize that they prefer the **pop** genre and suggest other pop songs. It can also compare features like **energy** to recommend songs with a similar intensity and **tempo** to find songs with a similar pace. **Mood** is another important feature because it helps match the overall vibe of the music. Although the dataset includes other features like **acousticness**, my recommender will mainly use **genre, mood, energy, and tempo** because I think those features best describe the kind of music someone is looking for.
+
+Here is the scoring model:
+
+Start each song with a score of 0.
+
+If the song genre matches the user's favorite genre:
+add 2.0 points
+
+If the song mood matches the user's favorite mood:
+add 1.0 point
+
+Add energy similarity:
+1 - abs(song energy - target energy)
+
+Add tempo similarity:
+1 - abs(song tempo - target tempo) / 100
+
+After scoring every song:
+sort songs from highest score to lowest score
+recommend the top songs
+
 ---
 
 ## Getting Started

@@ -1,4 +1,4 @@
-from src.recommender import Song, UserProfile, Recommender
+from src.recommender import Song, UserProfile, Recommender, load_songs, recommend_songs
 
 def make_small_recommender() -> Recommender:
     songs = [
@@ -59,3 +59,13 @@ def test_explain_recommendation_returns_non_empty_string():
     explanation = rec.explain_recommendation(user, song)
     assert isinstance(explanation, str)
     assert explanation.strip() != ""
+
+
+def test_recommend_songs_returns_recommendations_from_csv():
+    songs = load_songs("data/songs.csv")
+    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+
+    results = recommend_songs(user_prefs, songs, k=3)
+
+    assert len(results) > 0
+    assert results[0][0]["title"]
