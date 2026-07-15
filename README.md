@@ -91,56 +91,70 @@ You can add more tests in `tests/test_recommender.py`.
 ---
 
 ## Sample Recommendation Output
+Top recommendations:
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
-
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+1. Sunrise City
+   Score: 4.28
+   Why: Matches your preferences: genre match (+2.0), mood match (+1.0), energy similarity (+0.98), less acoustic (+0.3)
+----------------------------------------
+2. Gym Hero
+   Score: 3.17
+   Why: Matches your preferences: genre match (+2.0), energy similarity (+0.87), less acoustic (+0.3)
+----------------------------------------
+3. Rooftop Lights
+   Score: 2.26
+   Why: Matches your preferences: mood match (+1.0), energy similarity (+0.96), less acoustic (+0.3)
+----------------------------------------
+4. Neon Pulse
+   Score: 1.26
+   Why: Matches your preferences: energy similarity (+0.96), less acoustic (+0.3)
+----------------------------------------
+5. Night Drive Loop
+   Score: 1.25
+   Why: Matches your preferences: energy similarity (+0.95), less acoustic (+0.3)
 
 ---
 
 ## Experiments You Tried
+----------------------------------------
 
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+#TERMINAL OUTPUT FOR EACH PROFILE RECCOMENDATION 
+=== Trap profile ===
+User preferences: {'genre': 'hip-hop', 'mood': 'sad', 'energy': 0.1, 'likes_acoustic': True}
+1. Sunset Strings
+   Score: 1.38
+   Why: Matches your preferences: energy similarity (+0.88), acoustic preference (+0.5)
+----------------------------------------
+2. Spacewalk Thoughts
+   Score: 1.32
+   Why: Matches your preferences: energy similarity (+0.82), acoustic preference (+0.5)
+----------------------------------------
+3. Library Rain
+   Score: 1.25
+   Why: Matches your preferences: energy similarity (+0.75), acoustic preference (+0.5)
+----------------------------------------
+4. Blue Midnight
+   Score: 1.25
+   Why: Matches your preferences: energy similarity (+0.75), acoustic preference (+0.5)
+----------------------------------------
+5. Coffee Shop Stories
+   Score: 1.23
+   Why: Matches your preferences: energy similarity (+0.73), acoustic preference (+0.5)
+----------------------------------------
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+This recommender has a few important limitations. It only works with a small catalog of songs, so the recommendations are not very broad or diverse. It also relies on a small set of features, which means it does not understand deeper things like lyrics, artist style, or cultural context. Because of that, it can overemphasize one genre or mood and make the results feel repetitive.
 
 ---
 
 ## Reflection
 
-Read and complete `model_card.md`:
+Recommenders turn data into predictions by looking at a user’s preferences and comparing them to the features of available items. In this project, that meant giving songs points based on things like genre, mood, energy, and acousticness, then ranking them to choose the best matches. I learned that even a simple recommender can make decisions that feel surprisingly personal, because it is using patterns in the data to guess what a user might enjoy next.
 
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+Bias and unfairness can show up in systems like this when they rely too heavily on a few obvious features or when the data itself is limited. If one genre or mood is overrepresented, the system may keep recommending similar songs and make other kinds of music less likely to appear. That is important because recommender systems can quietly shape what people discover, and that can limit variety or reinforce existing habits.
 
 
 

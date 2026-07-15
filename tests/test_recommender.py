@@ -1,4 +1,4 @@
-from src.recommender import Song, UserProfile, Recommender, load_songs, recommend_songs
+from src.recommender import Song, UserProfile, Recommender, load_songs, recommend_songs, score_song
 
 def make_small_recommender() -> Recommender:
     songs = [
@@ -69,3 +69,24 @@ def test_recommend_songs_returns_recommendations_from_csv():
 
     assert len(results) > 0
     assert results[0][0]["title"]
+
+
+def test_energy_weighting_has_more_impact_than_genre_weighting():
+    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8, "likes_acoustic": False}
+    mismatched_genre = {
+        "genre": "rock",
+        "mood": "happy",
+        "energy": 0.8,
+        "acousticness": 0.2,
+    }
+    matching_genre = {
+        "genre": "pop",
+        "mood": "sad",
+        "energy": 0.2,
+        "acousticness": 0.2,
+    }
+
+    mismatched_genre_score, _ = score_song(user_prefs, mismatched_genre)
+    matching_genre_score, _ = score_song(user_prefs, matching_genre)
+
+    assert mismatched_genre_score > matching_genre_score
